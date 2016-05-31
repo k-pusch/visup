@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+    <head>
+        <meta charset="UTF-8" />
+        <title>VISUP</title>
+
+        <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,100,700' rel='stylesheet' type='text/css'>
+        <link href='assets/styles/visup.css' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+
+        <header>
+            <img id="logo" src="assets/images/logo.png" alt="VISUP Medieninformatik est. 2016" />
+            <form id="filter"></form>
+            <nav id="tabs">
+                <ul>
+                    <li> Bezirke </li>
+                    <li> Historie </li>
+                    <li> Keyfacts </li>
+                    <li> TOP 5 </li>
+                    <li> Verteilung Sitze AGH  </li>
+                    <li class="active"> Tabelle </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="table"></section>
+            <section id="district"></section>
+            <section id="history"></section>
+            <section id="keyfacts"></section>
+            <section id="top5"></section>
+            <section id="seatsAgh"></section>
+        </main>
+
+        <footer> </footer>
+
+        <!-- external -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
+        <script type="text/javascript" src="https://fb.me/react-15.1.0.min.js"></script>
+        <script type="text/javascript" src="https://fb.me/react-dom-15.1.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+        <!-- data -->
+        <script type="text/javascript" src="assets/js/data/parteispenden.js"></script>
+        <script type="text/javascript" src="assets/js/data/DataStore.js"></script>
+
+        <!-- components -->
+        <script type="text/babel" src="assets/js/components/DataTableComponent.js"></script>
+        <script type="text/babel" src="assets/js/components/FilterComponent.js"></script>
+
+        <!-- main -->
+        <script type="text/babel" src="assets/js/main.js"></script>
+    </body>
+</html>

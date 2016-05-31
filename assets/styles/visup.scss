@@ -1,0 +1,201 @@
+
+
+
+      $primary        : #A6A4AF;
+      $primary-dark   : #717382;
+      $accent         : #F4F48D;
+
+      $light-blue : #E5EAEE;
+
+      $danger   : #fff;
+      $success  : #fff;
+
+      $divider    : #fff;
+      $dark-grey  : #ddd;
+      $light-grey : #d3d3d3;
+
+
+
+
+
+      .input-field {
+        position: relative;
+
+        input {
+          -moz-border-left-colors: none;
+          -moz-border-right-colors: none;
+          -moz-border-top-colors: none;
+          background-color: transparent;
+          border-color: #bdbdbd;
+          border-image: none;
+          border-style: none none solid;
+          border-width: medium medium 1px;
+          box-shadow: none;
+          box-sizing: content-box;
+          font-size: 12px;
+          line-height: 18px;
+          height: 24px;
+          margin: 7px 0 11px;
+          padding: 0;
+          transition: all 0.3s ease 0s;
+          width: 100%;
+          outline: none;
+          font-family: "Roboto", sans-serif;
+        }
+
+
+        label {
+          color: #bdbdbd;
+          font-size: 10px;
+          cursor: text;
+          left: 0;
+          position: absolute;
+          top: 10px;
+          transition: all 0.2s ease-out 0s;
+        }
+
+
+        &.focus {
+          label {
+            transform: translateY(-140%);
+            color: $accent;
+          }
+
+
+          input {
+            border-bottom: 1px solid $accent;
+          }
+        }
+      }
+
+
+
+
+
+
+
+
+
+
+
+      body {
+        font-family : 'Roboto', sans-serif;
+        margin      : 0;
+      }
+
+
+      header {
+        height : 200px;
+        width  : 100%;
+        background-color : $primary;
+        color : $light-blue;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+        position:relative;
+
+
+        padding: 30px;
+
+        h1 {
+          font-family : 'Roboto Slab', sans-serif;
+        }
+
+        #logo {
+          width: 170px;
+          margin: 20px 30px 20px 30px;
+        }
+      }
+      
+      
+      nav#tabs {
+        position: absolute;
+        bottom:0;
+        left:0;
+        right:0;
+        width:100%;
+        
+        ul {
+          width: 100%;
+          padding-left:0;
+          
+          li {
+            display:block;
+            float:left;
+            list-style: none;
+            color: $light-blue;
+            font-family: "Roboto Slab", serif;
+            cursor: pointer;
+            text-align: center;
+            line-height:40px;
+
+            width:16%;
+            
+            &.active {
+              color: $accent;
+              border-bottom: 5px solid $accent;
+            }
+          }
+        }
+      }
+
+      form#filter {
+        position: absolute;
+        top: 120px;
+        left: 300px;
+      }
+
+
+      form {
+        .input-field {
+          position: relative;
+          display: inline;
+          margin-right: 30px;
+
+          input {
+            width : 250px;
+          }
+        }
+      }
+
+      header::before {
+        background-color : $primary-dark;
+        height : 16px;
+        width: 100%;
+        position : absolute;
+        top: 0;
+        left:0;
+        right:0;
+        content: "";
+      }
+
+
+      section {
+        padding: 10px 50px;
+      }
+
+      table.striped {
+        width:100%;
+        border-spacing: 0;
+        border-collapse: separate;
+
+        thead {
+          th {
+            color : $light-grey;
+            text-transform: uppercase;
+            font-size:12px;
+            text-align: left;
+          }
+        }
+
+        tbody {
+          tr:nth-child(odd) {
+            background-color: $light-blue;
+          }
+
+          color: rgb(78, 78, 78);
+          font-weight: 300;
+
+          td {
+            padding:4px;
+          }
+        }
+      }
