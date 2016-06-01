@@ -16,6 +16,24 @@
 
 
 
+      .hidden {
+        display : none;
+      }
+
+      .show {
+        display : inherit;
+      }
+
+
+      .form-inline  {
+
+        .select-field, .input-field {
+          display: inline-block;
+          margin: 0px 4px;
+          vertical-align: middle;
+        }
+      }
+
 
 
       .input-field {
@@ -67,6 +85,87 @@
           }
         }
       }
+
+
+      .select-field {
+
+
+        position         : relative;
+        select {
+          transition  : all 0.2s ease-out 0s;
+          border-image: none;
+          border-style: none none solid;
+          border-bottom: 1px solid #bdbdbd;;
+          border-radius: 0;
+
+          color      : $primary;
+          cursor     : pointer;
+          font-size  : 12px;
+          height     : 25px;
+          margin     : 7px 0 11px;
+          padding    : 0;
+          width      : 100%;
+          outline    : medium none;
+
+          appearance          : none;
+          -webkit-appearance  : none;
+          -moz-appearance     : none;
+
+          background    : url('/assets/images/menu-down.svg') no-repeat scroll 100% -4px rgba(0,0,0,0);  /*Adds background-image*/
+          text-indent   : 0.01px;
+          text-overflow : "";
+          option {
+            padding       : 6px;
+            border-style  : none none solid;
+            font-size     : 14px;
+          }
+          :-moz-focusring {
+            color: transparent;
+            text-shadow: 0 0 0 #000;
+          }
+        }
+        label {
+          color: #bdbdbd;
+          font-size: 10px;
+          cursor: text;
+          left: 0;
+          position: absolute;
+          transition: all 0.2s ease-out 0s;
+          top         : 14px;
+        }
+      }
+
+      .select-field.active {
+        label {
+          transform   : translateY(-140%);
+        }
+      }
+
+      .select-field.error {
+        select {
+          border-bottom: 1px solid $danger !important;
+        }
+        label {
+          color: $danger;
+        }
+      }
+
+      .select-field.focus {
+        select {
+          border-bottom-color: $accent;
+        }
+        label {
+          transform   : translateY(-140%);
+          color       : $accent;
+        }
+      }
+
+      .select-field.disabled {
+        select {
+          cursor: no-drop;
+        }
+      }
+
 
 
 
@@ -139,8 +238,9 @@
 
       form#filter {
         position: absolute;
-        top: 120px;
+        top: 20px;
         left: 300px;
+        right : 300px;
       }
 
 
@@ -153,6 +253,10 @@
           input {
             width : 250px;
           }
+        }
+
+        select {
+          width : 250px !important;
         }
       }
 

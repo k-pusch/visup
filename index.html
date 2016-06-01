@@ -11,26 +11,26 @@
 
         <header>
             <img id="logo" src="assets/images/logo.png" alt="VISUP Medieninformatik est. 2016" />
-            <form id="filter"></form>
+            <form id="filter" class="inline-form"></form>
             <nav id="tabs">
                 <ul>
-                    <li> Bezirke </li>
-                    <li> Historie </li>
-                    <li> Keyfacts </li>
-                    <li> TOP 5 </li>
-                    <li> Verteilung Sitze AGH  </li>
-                    <li class="active"> Tabelle </li>
+                    <li data-target="table" class="active"> Tabelle </li>
+                    <li data-target="district"> Bezirke </li>
+                    <li data-target="history"> Historie </li>
+                    <li data-target="keyfacts"> Keyfacts </li>
+                    <li data-target="top5"> TOP 5 </li>
+                    <li data-target="seatsAgh"> Verteilung Sitze AGH  </li>
                 </ul>
             </nav>
         </header>
 
         <main>
-            <section id="table"></section>
-            <section id="district"></section>
-            <section id="history"></section>
-            <section id="keyfacts"></section>
-            <section id="top5"></section>
-            <section id="seatsAgh"></section>
+            <section class="" id="table"></section>
+            <section class="hidden" id="district"></section>
+            <section class="hidden" id="history"></section>
+            <section class="hidden" id="keyfacts"></section>
+            <section class="hidden" id="top5"></section>
+            <section class="hidden" id="seatsAgh"></section>
         </main>
 
         <footer> </footer>
@@ -53,5 +53,6 @@
 
         <!-- main -->
         <script type="text/babel" src="assets/js/main.js"></script>
+        <script type="text/babel" src="assets/js/uiscript.js"></script>
     </body>
 </html>

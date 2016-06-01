@@ -22,27 +22,42 @@
 
             return (
                 <div class="form-wrapper">
-                    <select name="party" onChange={this.onChange}>
-                        <option value="">Alle</option>
-                        {partyOptions}
-                    </select>
+                    <div className="select-field">
+                        <select id="party" name="party" onChange={this.onChange}>
+                            <option value="">Alle</option>
+                            {partyOptions}
+                        </select>
+                        <label for="party">Partei</label>
+                    </div>
 
-                    <input name="name" type="text" onChange={this.onChange} />
+                    <div className="input-field">
+                        <input name="name" id="name" type="text" onChange={this.onChange} />
+                        <label for="name"> Spender </label>
+                    </div>
 
-                    <select name="typ" onChange={this.onChange}>
-                        <option value="">Alle</option>
-                        {typOptions}
-                    </select>
+                    <div className="select-field">
+                        <select id="type" name="typ" onChange={this.onChange}>
+                            <option value="">Alle</option>
+                            {typOptions}
+                        </select>
+                        <label for="type"> Spendentyp </label>
+                    </div>
 
-                    <select name="minYear" onChange={this.onChange}>
-                        <option value="">Alle</option>
-                        {yearOptions}
-                    </select>
+                    <div className="select-field">
+                        <select id="minyear" name="minYear" onChange={this.onChange}>
+                            <option value="">Alle</option>
+                            {yearOptions}
+                        </select>
+                        <label for="minyear"> Von Jahr </label>
+                    </div>
 
-                    <select name="maxYear" onChange={this.onChange}>
-                        <option value="">Alle</option>
-                        {yearOptions}
-                    </select>
+                    <div className="select-field">
+                        <select id="maxyear" name="maxYear" onChange={this.onChange}>
+                            <option value="">Alle</option>
+                            {yearOptions}
+                        </select>
+                        <label for="maxyear"> Bis Jahr </label>
+                    </div>
                 </div>
             );
         },
