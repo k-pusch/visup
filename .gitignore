@@ -5,3 +5,4 @@
 # Compiled Assets
 *.css
 *.css.map
+.sass-cache
