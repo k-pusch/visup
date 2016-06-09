@@ -6,3 +6,4 @@
 *.css
 *.css.map
 .sass-cache
+!assets/styles/districts.css

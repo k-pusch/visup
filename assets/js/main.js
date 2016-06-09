@@ -130,4 +130,52 @@
         <DataTable />,
         document.getElementById('table')
     );
+
+    /* init map */
+    (function () {
+        var map = d3.select('#map'),
+            width = map.attr('width'), height = map.attr('height');
+
+        d3.json('assets/js/data/berlin-bezirke.geojson', function (error, geodata) {
+            if (error) return console.error(error);
+
+            var latitudes = [], longitudes = [];
+
+            geodata.features.forEach(function (feature) {
+                feature.geometry.coordinates.forEach(function(items) {
+                    items.forEach(function (coordinates) {
+                        coordinates.forEach(function (coordinate) {
+                            var latitude = coordinate[0],
+                                longitude = coordinate[1];
+
+                            latitudes.push(latitude);
+                            longitudes.push(longitude);
+                        })
+                    })
+                });
+            });
+
+            var center = [
+                (Math.max.apply(Math, latitudes) + Math.min.apply(Math, latitudes)) / 2,
+                (Math.max.apply(Math, longitudes) + Math.min.apply(Math, longitudes)) / 2
+            ];
+
+            var projection = d3.geo.mercator()
+                .scale(48541.672162333)
+                .center(center)
+                .translate([width / 2, height / 2]);
+
+            var path = d3.geo.path().projection(projection);
+            var paths = map.selectAll('path').data(geodata.features);
+
+            paths.enter().append('path')
+                .attr('d', path)
+                .attr('id', function (feature) {
+                    return 'district-?'.replace('?', feature.properties.cartodb_id);
+                })
+                .append('title').text(function (feature) {
+                    return feature.properties.name;
+                });
+        })
+    })();
 })();
