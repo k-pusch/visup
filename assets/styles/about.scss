@@ -1,61 +1,76 @@
-body {
-	border-top: solid;
-	border-top-color: #717382;
-	border-width: 1vw;
-	background-color: #A6A4AF;
-	font-family : 'Roboto', sans-serif;
-	color: #fff;
-    margin      : 0;
-}
 
-.content{
-	margin: 0 auto;
-	width: 41vw;
-}
+	/*  IMPORT GENERAL SETTINGS */
+	@import "settings";
 
-img{
-	margin: 5vw auto 7vw;
-	width: 360px;
-	display: block;
-}
 
-.quote{
-	border-left: solid;
-	border-left-color: #F4F48D;
-	border-width: 5px;
-	padding-left: 20px;
-	font-size: 21px;
-}
+	body {
+		font-family : 'Roboto', sans-serif;
 
-.description{
-	margin: 2vw auto 4.5vw;
+		border-top 		 	: 1vw solid $primary-dark;
+		background-color 	: $primary;
+		color 				: $white;
+		margin 				: 0;
+	  	font-weight 		: lighter;
 
-}
+	  	padding-bottom 		: 100px;
+	}
 
-a{
-	margin: 0 auto;
-	width: 61px;
-	display: block;
-	border: solid;
-	border-color: #F4F48D;
-	border-width: 2px;
-	text-align: center;
-	text-decoration: none;
-}
+	main {
+		width   		: 60vw;
+	  	margin  		: 0 auto;
+	  	text-align 		: center;
 
-a:link{
-	color: #F4F48D;
-}
+	  	img {
+		  margin 		: 5vw auto 7vw;
+		  width 		: 30vw;
+		  display 		: block;
+	  	}
 
-a:visited{
-	color: #F4F48D;
-}
 
-a:hover{
-	color: #B5B500;
-	background-color: #F4F48D;
-}
+	  	blockquote {
+		  font-family 	: "Roboto Slab", serif;
+		  border-left  	: 5px solid $accent;
+		  padding-left  : 20px;
+		  font-size 	: 21px;
+		  text-align 	: left;
+		  margin-bottom : 6vw;
 
-a:active{
-	color: #F4F48D;
-}
+		  cite {
+			font-family : "Roboto", sans-serif;
+			font-weight : lighter;
+			font-size 	: 15px;
+			display 	: block;
+			font-style 	: normal;
+			margin-top 	: 20px;
+		  }
+		}
+
+
+	  	a {
+		  color  			: $white;
+		  border  			: 2px solid $white;
+		  border-radius 	: 2px;
+		  cursor 			: pointer;
+		  text-transform 	: uppercase;
+		  text-decoration 	: none;
+		  text-align 		: center;
+		  display 			: block;
+		  width 			: 80px;
+		  margin 			: 6vw auto;
+		  font-size 		: 13px;
+		  font-weight 		: 200;
+		  padding 			: 6px 8px;
+
+
+
+		  &:hover {
+			color 			: $accent;
+			border-color 	: $accent;
+		  }
+		}
+
+		p {
+		  margin 		: 2vw auto;
+		}
+
+	}
