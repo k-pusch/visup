@@ -1,0 +1,76 @@
+
+	/*  IMPORT GENERAL SETTINGS */
+	@import "settings";
+
+
+	body {
+		font-family : 'Roboto', sans-serif;
+
+		border-top 		 	: 1vw solid $primary-dark;
+		background-color 	: $primary;
+		color 				: $white;
+		margin 				: 0;
+	  	font-weight 		: lighter;
+
+	  	padding-bottom 		: 100px;
+	}
+
+	main {
+		width   		: 60vw;
+	  	margin  		: 0 auto;
+	  	text-align 		: center;
+
+	  	img {
+		  margin 		: 5vw auto 7vw;
+		  width 		: 30vw;
+		  display 		: block;
+	  	}
+
+
+	  	blockquote {
+		  font-family 	: "Roboto Slab", serif;
+		  border-left  	: 5px solid $accent;
+		  padding-left  : 20px;
+		  font-size 	: 21px;
+		  text-align 	: left;
+		  margin-bottom : 6vw;
+
+		  cite {
+			font-family : "Roboto", sans-serif;
+			font-weight : lighter;
+			font-size 	: 15px;
+			display 	: block;
+			font-style 	: normal;
+			margin-top 	: 20px;
+		  }
+		}
+
+
+	  	a {
+		  color  			: $white;
+		  border  			: 2px solid $white;
+		  border-radius 	: 2px;
+		  cursor 			: pointer;
+		  text-transform 	: uppercase;
+		  text-decoration 	: none;
+		  text-align 		: center;
+		  display 			: block;
+		  width 			: 80px;
+		  margin 			: 6vw auto;
+		  font-size 		: 13px;
+		  font-weight 		: 200;
+		  padding 			: 6px 8px;
+
+
+
+		  &:hover {
+			color 			: $accent;
+			border-color 	: $accent;
+		  }
+		}
+
+		p {
+		  margin 		: 2vw auto;
+		}
+
+	}
