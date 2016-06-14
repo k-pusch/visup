@@ -19,11 +19,9 @@
             $("#"+content).removeClass("hidden");
 
             if($(aghSeats).is(":visible") == true) {
-                $(form).addClass("disabled");
-                $(form + " select, "+ form + " input").attr("disabled", "disabled");
+                $(form).addClass("hidden");
             } else {
-                $(form).removeClass("disabled");
-                $(form + " select, "+ form + " input").removeAttr("disabled");
+                $(form).removeClass("hidden");
             }
 
         });

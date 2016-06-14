@@ -1,5 +1,6 @@
 
 @import "settings";
+@import "district";
 
 
 .hidden {
@@ -97,7 +98,7 @@
     -webkit-appearance  : none;
     -moz-appearance     : none;
 
-    background    : url('/assets/images/menu-down.svg') no-repeat scroll 100% -4px rgba(0,0,0,0);  /*Adds background-image*/
+    background    : url('../images/menu-down.svg') no-repeat scroll 100% -4px rgba(0,0,0,0);  /*Adds background-image*/
     text-indent   : 0.01px;
     text-overflow : "";
     option {
@@ -353,25 +354,60 @@ section#seatsAgh {
   }
 
 
-  aside {
-    position : absolute;
+  aside.legend {
+    position : fixed;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.26);
     width : 300px;
     padding: 10px;
+    left: 20px;
+    bottom: 50px;
 
     h4 {
       color : $primary-dark;
       font-family: "Roboto Slab", serif;
-      margin: 0 10px;
+      margin: 0 10px 5px;
     }
     
     ul {
       margin-top : 0 !important;
       height : auto !important;
+      padding: 0;
 
       li {
         list-style: none;
+        padding: 5px;
+        margin: 3px;
+        width: 40%;
+
+        &.spd {
+          border-left: 5px solid $spd;
+        }
+
+
+
+        &.cdu {
+          border-left: 5px solid $cdu;
+        }
+
+
+        &.piraten {
+          border-left: 5px solid $piraten;
+        }
+
+
+        &.fdp {
+          border-left: 5px solid $fdp;
+        }
+
+
+        &.linke {
+          border-left: 5px solid $linke;
+        }
+
+        &.gruene {
+          border-left: 5px solid $gruene;
+        }
       }
     }
   }
