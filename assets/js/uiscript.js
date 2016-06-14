@@ -2,8 +2,10 @@
 
     $(function() {
 
-        var tabitems    =  "nav#tabs ul li",
-            body         = "body";
+        var tabitems        = "nav#tabs ul li",
+            body            = "body",
+            aghSeats        = "#seatsAgh",
+            form            = "#filter";
 
         $(body).on("click", tabitems, function() {
 
@@ -15,6 +17,15 @@
 
             var content = $(this).attr("data-target");
             $("#"+content).removeClass("hidden");
+
+            if($(aghSeats).is(":visible") == true) {
+                $(form).addClass("disabled");
+                $(form + " select, "+ form + " input").attr("disabled", "disabled");
+            } else {
+                $(form).removeClass("disabled");
+                $(form + " select, "+ form + " input").removeAttr("disabled");
+            }
+
         });
 
 
@@ -49,7 +60,6 @@
                 field.addClass("active");
             }
         });
-
 
     });
 

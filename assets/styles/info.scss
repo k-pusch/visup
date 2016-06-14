@@ -1,0 +1,54 @@
+/* IMPORT GENERAL STYLINGS */
+@import "settings";
+
+
+body {
+  font-family : 'Roboto', sans-serif;
+
+  border-top : 1vw solid $primary-dark;
+  background-color : $primary;
+  color : $white;
+  margin : 0;
+  font-weight : lighter;
+  padding-bottom : 100px;
+}
+
+
+header {
+  img {
+    width : 150px;
+    padding: 3vw 7vw;
+  }
+}
+
+main {
+  padding : 3vw 7vw;
+
+  section {
+    h2 {
+      font-family: "Roboto Slab", serif;
+      font-weight: lighter;
+    }
+
+    a {
+      text-decoration: underline;
+      cursor: pointer;
+      color: $white;
+
+      &:hover {
+        color : $accent;
+      }
+    }
+  }
+}
+
+
+dl {
+  dt {
+    margin-top: 20px;
+  }
+
+  dt:first-of-type {
+    margin-top:0;
+  }
+}
