@@ -22,6 +22,7 @@
         render: function () {
             var partyOptions = this.renderOptions('party'),
                 typOptions = this.renderOptions('typ'),
+                districtOptions = this.renderOptions('district'),
                 yearOptions = this.renderOptions('year');
 
             return (
@@ -45,6 +46,14 @@
                             {typOptions}
                         </select>
                         <label for="type"> Spendentyp </label>
+                    </div>
+
+                    <div className="select-field">
+                        <select id="district" name="district" onChange={this.onChange}>
+                            <option value="">Alle</option>
+                            {districtOptions}
+                        </select>
+                        <label for="district"> Bezirk </label>
                     </div>
 
                     <div className="select-field">
