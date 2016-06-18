@@ -1,24 +1,28 @@
 (function () {
     var Filter = React.createClass({
 
+        getInitialState: function() {
+            return {
+                dataStore: null
+            };
+        },
+
+        renderOptions: function (field) {
+            var dataStore = this.state.dataStore;
+
+            if (dataStore === null) return;
+
+            return dataStore.getFilterValues(field).map(function (option, index) {
+                return (
+                    <option key={index} value={option.value}>{option.name}</option>
+                );
+            });
+        },
+
         render: function () {
-            var partyOptions = DataStore.getFilterValues('party').map(function (party, index) {
-                return (
-                    <option key={index} value={party}>{party}</option>
-                );
-            });
-
-            var typOptions = DataStore.getFilterValues('typ').map(function (typ, index) {
-                return (
-                    <option key={index} value={typ}>{DataStore.getTypName(typ)}</option>
-                );
-            });
-
-            var yearOptions = DataStore.getFilterValues('year').map(function (year, index) {
-                return (
-                    <option key={index} value={year}>{year}</option>
-                );
-            });
+            var partyOptions = this.renderOptions('party'),
+                typOptions = this.renderOptions('typ'),
+                yearOptions = this.renderOptions('year');
 
             return (
                 <div class="form-wrapper">
@@ -64,37 +68,78 @@
 
         onChange: function (event) {
             var target = event.target,
-                state = {};
+                filter = {};
 
-            state[target.name] = target.value || null;
+            filter[target.name] = target.value || null;
 
-            dataTableComponent.setState(state);
+            dataTableComponent.updateFilters(filter);
+        },
+
+        componentDidMount: function () {
+            var self = this;
+
+            DataStore.onReady(function (dataStore) {
+                self.setState({
+                    dataStore: dataStore
+                }, null);
+            });
         }
+
     });
 
     var DataTable = React.createClass({
 
         getInitialState: function() {
-            return {};
+            return {
+                dataStore: null,
+                filters: {}
+            };
         },
 
         formatCurrency: function (value) {
             return value.toFixed(2).replace('.', ',')
         },
 
+        shorten: function (value, length) {
+            if (value.length > length) {
+                var shortValue = value.substring(0, length - 3).concat('...');
+
+                return (
+                    <abbr title={value}>{shortValue}</abbr>
+                )
+            }
+
+            return value;
+        },
+
+        updateFilters: function (filter) {
+            this.setState({
+                filters: _.extend(this.state.filters, filter)
+            }, null);
+        },
+
+        getEntries: function () {
+            var dataStore = this.state.dataStore;
+
+            if (dataStore === null) return [];
+
+            return dataStore.getEntries(this.state.filters);
+        },
+
         render: function() {
-            var self = this,
-                entries = DataStore.getEntries(this.state);
+            var self = this, entries = self.getEntries();
+
+            /* TODO: show spinner until data store is ready */
 
             var rows = entries.map(function(entry, index) {
                 return (
                     <tr key={index}>
                         <td>{entry.year}</td>
                         <td>{entry.party}</td>
-                        <td>{entry.name}</td>
+                        <td>{self.shorten(entry.name, 50)}</td>
                         <td>{entry.street}</td>
                         <td>{entry.plz}</td>
-                        <td>{entry.city}</td>
+                        <td>{entry.districtName}</td>
                         <td>{self.formatCurrency(entry.val)} €</td>
                     </tr>
                 );
@@ -109,7 +154,7 @@
                         <th>Spender</th>
                         <th>Straße</th>
                         <th>PLZ</th>
-                        <th>Stadt</th>
+                        <th>Bezirk</th>
                         <th>Betrag</th>
                     </tr>
                     </thead>
@@ -118,6 +163,16 @@
                     </tbody>
                 </table>
             );
+        },
+
+        componentDidMount: function () {
+            var self = this;
+
+            DataStore.onReady(function (dataStore) {
+                self.setState({
+                    dataStore: dataStore
+                }, null);
+            });
         }
     });
 
@@ -132,50 +187,33 @@
     );
 
     /* init map */
-    (function () {
+    GEOStore.onReady(function (geoStore) {
         var map = d3.select('#map'),
-            width = map.attr('width'), height = map.attr('height');
+            width = map.attr('width'),
+            height = map.attr('height'),
+            center = geoStore.getCenter(),
+            districts = geoStore.getDistricts();
 
-        d3.json('assets/js/data/berlin-bezirke.geojson', function (error, geodata) {
-            if (error) return console.error(error);
+        districts = _.values(districts);
 
-            var latitudes = [], longitudes = [];
+        var projection = d3.geo.mercator()
+            .scale(48541.672162333)
+            .center(center)
+            .translate([width / 2, height / 2]);
 
-            geodata.features.forEach(function (feature) {
-                feature.geometry.coordinates.forEach(function(items) {
-                    items.forEach(function (coordinates) {
-                        coordinates.forEach(function (coordinate) {
-                            var latitude = coordinate[0],
-                                longitude = coordinate[1];
+        var path = d3.geo.path().projection(projection);
+        var paths = map.selectAll('path').data(districts);
 
-                            latitudes.push(latitude);
-                            longitudes.push(longitude);
-                        })
-                    })
-                });
+        paths.enter().append('path')
+            .attr('d', function (district) {
+                return path(district.bounds)
+            })
+            .attr('id', function (district) {
+                return 'district-?'.replace('?', district.id);
+            })
+            .append('title').text(function (district) {
+                return district.name;
             });
 
-            var center = [
-                (Math.max.apply(Math, latitudes) + Math.min.apply(Math, latitudes)) / 2,
-                (Math.max.apply(Math, longitudes) + Math.min.apply(Math, longitudes)) / 2
-            ];
-
-            var projection = d3.geo.mercator()
-                .scale(48541.672162333)
-                .center(center)
-                .translate([width / 2, height / 2]);
-
-            var path = d3.geo.path().projection(projection);
-            var paths = map.selectAll('path').data(geodata.features);
-
-            paths.enter().append('path')
-                .attr('d', path)
-                .attr('id', function (feature) {
-                    return 'district-?'.replace('?', feature.properties.cartodb_id);
-                })
-                .append('title').text(function (feature) {
-                    return feature.properties.name;
-                });
-        })
-    })();
+    });
 })();
