@@ -153,6 +153,30 @@ var DataStore = (function (_, data) {
         })
     };
 
+    var getEntriesForIDs = function (ids) {
+        return ids.map(function (id) {
+            return data[id];
+        })
+    };
+
+    var aggregateEntries = function (entries) {
+        return entries.reduce(function (value, entry) {
+            return value + entry.val;
+        }, 0.00)
+    };
+
+    var aggregateField = function (field) {
+        return _.mapValues(mapping[field], function (ids) {
+            var entries = getEntriesForIDs(ids);
+            return aggregateEntries(entries);
+        });
+    };
+
+    var aggregateFilter = function (filter) {
+        var entries = getEntries(filter);
+        return aggregateEntries(entries);
+    };
+
     var onReady = function (callback) {
         promise.then(function () {
             return callback(methods);
@@ -161,7 +185,12 @@ var DataStore = (function (_, data) {
 
     var methods = {
         getEntries: getEntries,
-        getFilterValues: getFilterValues
+        getFilterValues: getFilterValues,
+        aggregate: {
+            entries: aggregateEntries,
+            field: aggregateField,
+            filter: aggregateFilter
+        }
     };
 
     return {

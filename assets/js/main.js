@@ -135,8 +135,16 @@
             return dataStore.getEntries(this.state.filters);
         },
 
+        getAggregate: function (entries) {
+            var dataStore = this.state.dataStore;
+
+            if (dataStore === null) return 0.00;
+
+            return dataStore.aggregate.entries(entries);
+        },
+
         render: function() {
-            var self = this, entries = self.getEntries();
+            var self = this, entries = self.getEntries(), total = self.getAggregate(entries);
 
             /* TODO: show spinner until data store is ready */
 
@@ -157,18 +165,26 @@
             return (
                 <table className="striped">
                     <thead>
-                    <tr>
-                        <th>Jahr</th>
-                        <th>Partei</th>
-                        <th>Spender</th>
-                        <th>Straße</th>
-                        <th>PLZ</th>
-                        <th>Bezirk</th>
-                        <th>Betrag</th>
-                    </tr>
+                        <tr>
+                            <th>Jahr</th>
+                            <th>Partei</th>
+                            <th>Spender</th>
+                            <th>Straße</th>
+                            <th>PLZ</th>
+                            <th>Bezirk</th>
+                            <th>Betrag</th>
+                        </tr>
                     </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Gesamt</th>
+                            <th colspan="6">
+                                {self.formatCurrency(total)} €
+                            </th>
+                        </tr>
+                    </tfoot>
                     <tbody>
-                    {rows}
+                        {rows}
                     </tbody>
                 </table>
             );
