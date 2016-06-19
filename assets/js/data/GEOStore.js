@@ -1,7 +1,6 @@
 var GEOStore = (function ($, d3) {
 
-    var self = this,
-        center = null,
+    var center = null,
         districts = null;
 
     var promise = new Promise(function (resolve, reject) {
