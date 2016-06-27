@@ -7,25 +7,62 @@ var DataStore = (function (_, data) {
         'street',
         'plz',
         'city',
-        'typ'
+        'typ',
+        'district'
     ];
+
+    var options = {
+        district: {},
+        typ: {
+            nat: 'Natürliche Person',
+            jur: 'Juristische Person'
+        }
+    };
 
     var mapping = {};
 
-    fields.forEach(function (field) {
-        var values = {};
+    var init = function (geoStore) {
+        var districtObjects = geoStore.getDistricts(),
+            districts = options.district;
 
-        data.forEach(function (entry, index) {
-            var value = entry[field];
-
-            if (typeof values[value] === 'undefined') {
-                values[value] = [index];
-            } else {
-                values[value].push(index);
-            }
+        Object.keys(districtObjects).forEach(function (id) {
+            districts[id] = districtObjects[id].name;
         });
 
-        mapping[field] = values;
+        data.forEach(function (entry) {
+            var district = geoStore.getDistrictByCoords(entry.lat, entry.lon);
+
+            entry.district = district.id;
+            entry.districtName = district.name;
+        });
+
+        fields.forEach(function (field) {
+            var values = {};
+
+            data.forEach(function (entry, index) {
+                var value = entry[field];
+
+                if (value in values) {
+                    values[value].push(index);
+                } else {
+                    values[value] = [index];
+                }
+            });
+
+            mapping[field] = values;
+        });
+    };
+
+    var promise = new Promise(function (resolve, reject) {
+        GEOStore.onReady(
+            function (geoStore) {
+                init(geoStore);
+                return resolve(true);
+            },
+            function (error) {
+                return reject(error);
+            }
+        );
     });
 
     var filters = {
@@ -70,6 +107,9 @@ var DataStore = (function (_, data) {
         },
         maxYear: function (value) {
             return filters.year(function (year) { return year <= value});
+        },
+        district: function (value) {
+            return mapping.district[value];
         }
     };
 
@@ -101,28 +141,60 @@ var DataStore = (function (_, data) {
 
     var getFilterValues = function (field) {
         var data = mapping[field],
-            values = Object.keys(data);
+            values = Object.keys(data),
+            names = options[field] || {};
 
         values.sort(function (left, right) {
             return data[right].length - data[left].length;
         });
 
-        return values;
+        return values.map(function (value) {
+            return {value: value, name: names[value] || value}
+        })
     };
 
-    var TypNames = {
-        nat: 'Natürliche Person',
-        jur: 'Juristische Person'
+    var getEntriesForIDs = function (ids) {
+        return ids.map(function (id) {
+            return data[id];
+        })
     };
 
-    var getTypName = function (value) {
-        return TypNames[value];
+    var aggregateEntries = function (entries) {
+        return entries.reduce(function (value, entry) {
+            return value + entry.val;
+        }, 0.00)
+    };
+
+    var aggregateField = function (field) {
+        return _.mapValues(mapping[field], function (ids) {
+            var entries = getEntriesForIDs(ids);
+            return aggregateEntries(entries);
+        });
+    };
+
+    var aggregateFilter = function (filter) {
+        var entries = getEntries(filter);
+        return aggregateEntries(entries);
+    };
+
+    var onReady = function (callback) {
+        promise.then(function () {
+            return callback(methods);
+        });
+    };
+
+    var methods = {
+        getEntries: getEntries,
+        getFilterValues: getFilterValues,
+        aggregate: {
+            entries: aggregateEntries,
+            field: aggregateField,
+            filter: aggregateFilter
+        }
     };
 
     return {
-        getEntries: getEntries,
-        getFilterValues: getFilterValues,
-        getTypName: getTypName
+        onReady: onReady
     }
 
 })(_, partyData);
