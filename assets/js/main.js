@@ -1,3 +1,33 @@
+function formatCurrency (value) {
+    var fixed = value.toFixed(2),
+        bits = fixed.split('.'),
+        number = bits[0],
+        decimal = bits[1];
+
+    if (number.length <= 3) {
+        return number + ',' + decimal;
+    }
+
+    var remainder = number.length % 3,
+        head, tail, groups;
+
+    if (remainder) {
+        head = number.substr(0, remainder);
+        tail = number.substr(remainder);
+        groups = [head];
+
+    } else {
+        tail = number;
+        groups = [];
+    }
+
+    for (var start = 0; start < tail.length; start += 3) {
+        groups.push(tail.substr(start, 3));
+    }
+
+    return groups.join('.') + ',' + decimal;
+}
+
 (function () {
     var Filter = React.createClass({
 
@@ -105,36 +135,6 @@
             };
         },
 
-        formatCurrency: function (value) {
-            var fixed = value.toFixed(2),
-                bits = fixed.split('.'),
-                number = bits[0],
-                decimal = bits[1];
-
-            if (number.length <= 3) {
-                return number + ',' + decimal;
-            }
-
-            var remainder = number.length % 3,
-                head, tail, groups;
-
-            if (remainder) {
-                head = number.substr(0, remainder);
-                tail = number.substr(remainder);
-                groups = [head];
-
-            } else {
-                tail = number;
-                groups = [];
-            }
-
-            for (var start = 0; start < tail.length; start += 3) {
-                groups.push(tail.substr(start, 3));
-            }
-
-            return groups.join('.') + ',' + decimal;
-        },
-
         shorten: function (value, length) {
             if (value.length > length) {
                 var shortValue = value.substring(0, length - 3).concat('...');
@@ -183,7 +183,7 @@
                         <td>{entry.street}</td>
                         <td>{entry.plz}</td>
                         <td>{entry.districtName}</td>
-                        <td>{self.formatCurrency(entry.val)} €</td>
+                        <td>{formatCurrency(entry.val)} €</td>
                     </tr>
                 );
             });
@@ -205,7 +205,7 @@
                         <tr>
                             <th>Gesamt</th>
                             <th colspan="6">
-                                {self.formatCurrency(total)} €
+                                {formatCurrency(total)} €
                             </th>
                         </tr>
                     </tfoot>
@@ -274,7 +274,11 @@
                     return 'fill: rgb(255, #, #)'.replace(/#/g, value)
                 })
                 .append('title').text(function (district) {
-                    return district.name;
+                    var total = formatCurrency(totals[district.id] || 0);
+
+                    return '{name}: {total} €'
+                        .replace('{name}', district.name)
+                        .replace('{total}', total);
                 });
 
         });
