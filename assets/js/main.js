@@ -28,48 +28,48 @@
             return (
                 <div class="form-wrapper">
                     <div className="select-field">
-                        <select id="party" name="party" onChange={this.onChange}>
+                        <select id="party-filter" name="party" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {partyOptions}
                         </select>
-                        <label for="party">Partei</label>
+                        <label for="party-filter">Partei</label>
                     </div>
 
                     <div className="input-field">
-                        <input name="name" id="name" type="text" onChange={this.onChange} />
-                        <label for="name"> Spender </label>
+                        <input id="name-filter" name="name" type="text" onChange={this.onChange} />
+                        <label for="name-filter"> Spender </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="type" name="typ" onChange={this.onChange}>
+                        <select id="type-filter" name="typ" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {typOptions}
                         </select>
-                        <label for="type"> Spendentyp </label>
+                        <label for="type-filter"> Spendentyp </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="district" name="district" onChange={this.onChange}>
+                        <select id="district-filter" name="district" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {districtOptions}
                         </select>
-                        <label for="district"> Bezirk </label>
+                        <label for="district-filter"> Bezirk </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="minyear" name="minYear" onChange={this.onChange}>
+                        <select id="minyear-filter" name="minYear" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {yearOptions}
                         </select>
-                        <label for="minyear"> Von Jahr </label>
+                        <label for="minyear-filter"> Von Jahr </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="maxyear" name="maxYear" onChange={this.onChange}>
+                        <select id="maxyear-filter" name="maxYear" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {yearOptions}
                         </select>
-                        <label for="maxyear"> Bis Jahr </label>
+                        <label for="maxyear-filter"> Bis Jahr </label>
                     </div>
                 </div>
             );
