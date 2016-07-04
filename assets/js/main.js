@@ -1,3 +1,33 @@
+function formatCurrency (value) {
+    var fixed = value.toFixed(2),
+        bits = fixed.split('.'),
+        number = bits[0],
+        decimal = bits[1];
+
+    if (number.length <= 3) {
+        return number + ',' + decimal;
+    }
+
+    var remainder = number.length % 3,
+        head, tail, groups;
+
+    if (remainder) {
+        head = number.substr(0, remainder);
+        tail = number.substr(remainder);
+        groups = [head];
+
+    } else {
+        tail = number;
+        groups = [];
+    }
+
+    for (var start = 0; start < tail.length; start += 3) {
+        groups.push(tail.substr(start, 3));
+    }
+
+    return groups.join('.') + ',' + decimal;
+}
+
 (function () {
     var Filter = React.createClass({
 
@@ -28,48 +58,48 @@
             return (
                 <div class="form-wrapper">
                     <div className="select-field">
-                        <select id="party" name="party" onChange={this.onChange}>
+                        <select id="party-filter" name="party" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {partyOptions}
                         </select>
-                        <label for="party">Partei</label>
+                        <label for="party-filter">Partei</label>
                     </div>
 
                     <div className="input-field">
-                        <input name="name" id="name" type="text" onChange={this.onChange} />
-                        <label for="name"> Spender </label>
+                        <input id="name-filter" name="name" type="text" onChange={this.onChange} />
+                        <label for="name-filter"> Spender </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="type" name="typ" onChange={this.onChange}>
+                        <select id="type-filter" name="typ" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {typOptions}
                         </select>
-                        <label for="type"> Spendentyp </label>
+                        <label for="type-filter"> Spendentyp </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="district" name="district" onChange={this.onChange}>
+                        <select id="district-filter" name="district" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {districtOptions}
                         </select>
-                        <label for="district"> Bezirk </label>
+                        <label for="district-filter"> Bezirk </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="minyear" name="minYear" onChange={this.onChange}>
+                        <select id="minyear-filter" name="minYear" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {yearOptions}
                         </select>
-                        <label for="minyear"> Von Jahr </label>
+                        <label for="minyear-filter"> Von Jahr </label>
                     </div>
 
                     <div className="select-field">
-                        <select id="maxyear" name="maxYear" onChange={this.onChange}>
+                        <select id="maxyear-filter" name="maxYear" onChange={this.onChange}>
                             <option value="">Alle</option>
                             {yearOptions}
                         </select>
-                        <label for="maxyear"> Bis Jahr </label>
+                        <label for="maxyear-filter"> Bis Jahr </label>
                     </div>
                 </div>
             );
@@ -103,36 +133,6 @@
                 dataStore: null,
                 filters: {}
             };
-        },
-
-        formatCurrency: function (value) {
-            var fixed = value.toFixed(2),
-                bits = fixed.split('.'),
-                number = bits[0],
-                decimal = bits[1];
-
-            if (number.length <= 3) {
-                return number + ',' + decimal;
-            }
-
-            var remainder = number.length % 3,
-                head, tail, groups;
-
-            if (remainder) {
-                head = number.substr(0, remainder);
-                tail = number.substr(remainder);
-                groups = [head];
-
-            } else {
-                tail = number;
-                groups = [];
-            }
-
-            for (var start = 0; start < tail.length; start += 3) {
-                groups.push(tail.substr(start, 3));
-            }
-
-            return groups.join('.') + ',' + decimal;
         },
 
         shorten: function (value, length) {
@@ -183,7 +183,7 @@
                         <td>{entry.street}</td>
                         <td>{entry.plz}</td>
                         <td>{entry.districtName}</td>
-                        <td>{self.formatCurrency(entry.val)} €</td>
+                        <td>{formatCurrency(entry.val)} €</td>
                     </tr>
                 );
             });
@@ -205,7 +205,7 @@
                         <tr>
                             <th>Gesamt</th>
                             <th colspan="6">
-                                {self.formatCurrency(total)} €
+                                {formatCurrency(total)} €
                             </th>
                         </tr>
                     </tfoot>
@@ -255,16 +255,32 @@
         var path = d3.geo.path().projection(projection);
         var paths = map.selectAll('path').data(districts);
 
-        paths.enter().append('path')
-            .attr('d', function (district) {
-                return path(district.bounds)
-            })
-            .attr('id', function (district) {
-                return 'district-?'.replace('?', district.id);
-            })
-            .append('title').text(function (district) {
-                return district.name;
-            });
+        DataStore.onReady(function (dataStore) {
+            var totals = dataStore.aggregate.field('district'),
+                values = _.values(totals),
+                max = _.max(values);
 
+            paths.enter().append('path')
+                .attr('d', function (district) {
+                    return path(district.bounds)
+                })
+                .attr('id', function (district) {
+                    return 'district-?'.replace('?', district.id);
+                })
+                .attr('style', function (district) {
+                    var total = totals[district.id] || 0,
+                        value = (255 * (1 - total / max)).toFixed(0);
+
+                    return 'fill: rgb(255, #, #)'.replace(/#/g, value)
+                })
+                .append('title').text(function (district) {
+                    var total = formatCurrency(totals[district.id] || 0);
+
+                    return '{name}: {total} €'
+                        .replace('{name}', district.name)
+                        .replace('{total}', total);
+                });
+
+        });
     });
 })();
