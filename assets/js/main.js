@@ -255,16 +255,28 @@
         var path = d3.geo.path().projection(projection);
         var paths = map.selectAll('path').data(districts);
 
-        paths.enter().append('path')
-            .attr('d', function (district) {
-                return path(district.bounds)
-            })
-            .attr('id', function (district) {
-                return 'district-?'.replace('?', district.id);
-            })
-            .append('title').text(function (district) {
-                return district.name;
-            });
+        DataStore.onReady(function (dataStore) {
+            var totals = dataStore.aggregate.field('district'),
+                values = _.values(totals),
+                max = _.max(values);
 
+            paths.enter().append('path')
+                .attr('d', function (district) {
+                    return path(district.bounds)
+                })
+                .attr('id', function (district) {
+                    return 'district-?'.replace('?', district.id);
+                })
+                .attr('style', function (district) {
+                    var total = totals[district.id] || 0,
+                        value = (255 * (1 - total / max)).toFixed(0);
+
+                    return 'fill: rgb(255, #, #)'.replace(/#/g, value)
+                })
+                .append('title').text(function (district) {
+                    return district.name;
+                });
+
+        });
     });
 })();
