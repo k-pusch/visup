@@ -113,6 +113,12 @@ var DataStore = (function (_, data) {
         }
     };
 
+    var sorting = {
+        year: function (left, right) {
+            return left - right;
+        }
+    };
+
     var getEntries = function (filter) {
         if (typeof filter === 'undefined') {
             /* no filters to apply */
@@ -142,11 +148,18 @@ var DataStore = (function (_, data) {
     var getFilterValues = function (field) {
         var data = mapping[field],
             values = Object.keys(data),
-            names = options[field] || {};
+            names = options[field] || {},
+            comparator;
 
-        values.sort(function (left, right) {
-            return data[right].length - data[left].length;
-        });
+        if (field in sorting) {
+            comparator = sorting[field];
+        } else {
+            comparator = function (left, right) {
+                return this[right].length - this[left].length;
+            }
+        }
+
+        values.sort(_.bind(comparator, data));
 
         return values.map(function (value) {
             return {value: value, name: names[value] || value}
