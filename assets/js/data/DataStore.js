@@ -113,12 +113,6 @@ var DataStore = (function (_, data) {
         }
     };
 
-    var sorting = {
-        year: function (left, right) {
-            return left - right;
-        }
-    };
-
     var getEntries = function (filter) {
         if (typeof filter === 'undefined') {
             /* no filters to apply */
@@ -145,25 +139,22 @@ var DataStore = (function (_, data) {
         });
     };
 
-    var getFilterValues = function (field) {
+    var getFilterValues = function (field, orderBy, order) {
         var data = mapping[field],
             values = Object.keys(data),
             names = options[field] || {},
-            comparator;
+            filters = values.map(function (value) {
+                var entries = data[value];
 
-        if (field in sorting) {
-            comparator = sorting[field];
-        } else {
-            comparator = function (left, right) {
-                return this[right].length - this[left].length;
-            }
-        }
+                return {
+                    value: value,
+                    name: names[value] || value,
+                    count: entries.length,
+                    total: orderBy === 'total' ? aggregateEntries(entries) : 0
+                }
+            });
 
-        values.sort(_.bind(comparator, data));
-
-        return values.map(function (value) {
-            return {value: value, name: names[value] || value}
-        })
+        return _.orderBy(filters, [orderBy || 'name'], [order || 'asc']);
     };
 
     var getEntriesForIDs = function (ids) {

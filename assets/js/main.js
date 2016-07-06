@@ -37,12 +37,12 @@ function formatCurrency (value) {
             };
         },
 
-        renderOptions: function (field) {
+        renderOptions: function (field, orderBy, order) {
             var dataStore = this.state.dataStore;
 
             if (dataStore === null) return;
 
-            return dataStore.getFilterValues(field).map(function (option, index) {
+            return dataStore.getFilterValues(field, orderBy, order).map(function (option, index) {
                 return (
                     <option key={index} value={option.value}>{option.name}</option>
                 );
@@ -53,7 +53,7 @@ function formatCurrency (value) {
             var partyOptions = this.renderOptions('party'),
                 typOptions = this.renderOptions('typ'),
                 districtOptions = this.renderOptions('district'),
-                yearOptions = this.renderOptions('year');
+                yearOptions = this.renderOptions('year', 'value', 'asc');
 
             return (
                 <div class="form-wrapper">
