@@ -21,6 +21,8 @@
   }
 }
 
+body {padding-bottom:80px;}
+
 
 
 .input-field {
@@ -177,7 +179,7 @@ header {
   background-color : $primary;
   color : $light-blue;
   box-shadow: 0 2px 5px rgba(0,0,0,0.26);
-  position:relative;
+  position:fixed;
 
 
   padding: 30px;
@@ -192,6 +194,9 @@ header {
   }
 }
 
+main {
+  padding-top: 280px;
+}
 
 nav#tabs {
   position: absolute;
@@ -434,5 +439,42 @@ form.inline-form {
     vertical-align: middle;
     margin-right: 30px;
     width: 250px !important;
+  }
+}
+
+.flex-container {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+
+  text-align: center;
+
+  .flex-item {
+    -webkit-flex: 1 auto;
+    flex: 1 auto;
+    padding: 10px;
+    margin: 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+    h3 {
+      font-family: "Roboto Slab", serif;
+      margin:0;
+    }
+
+
+    &.yellow {
+      border: 20px solid $accent;
+    }
+
+    &.grey {
+      border: 20px solid $light-grey;
+    }
+
+    &.blue {
+      border: 20px solid $light-blue;
+    }
   }
 }
