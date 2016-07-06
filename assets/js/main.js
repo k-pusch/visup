@@ -281,6 +281,73 @@ function formatCurrency (value) {
                         .replace('{total}', total);
                 });
 
+            _.defer(function () {
+                var parties = dataStore.getFilterValues('party');
+
+                var donations = parties.map(function (party) {
+                    var entries = dataStore.getEntries({party: party.value}),
+                        names = entries.map(function (entry) { return entry.name });
+
+                    var donors = _.uniq(names).map(function (name) {
+                        return {
+                            name: name,
+                            value: dataStore.aggregate.filter({party: party.value, name: name})
+                        };
+                    });
+
+                    var sorted = _.orderBy(donors, ['value'], ['desc']);
+
+                    return {
+                        party: party.name,
+                        donors: sorted.slice(0, 5)
+                    };
+                });
+
+                var width = 500,
+                    height = 500,
+                    radius = Math.min(width, height) / 2,
+                    translate = 'translate(x,y)'.replace('x', String(width / 2)).replace('y', String(height / 2)),
+                    colors = d3.scale.category20b(),
+                    pieGenerator = d3.layout.pie().value(function (donor) { return donor.value }),
+                    arcGenerator = d3.svg.arc().outerRadius(radius).innerRadius(radius * 0.5);
+
+                var top5 = d3.select('#top5');
+
+                var svg = top5
+                    .selectAll('svg')
+                    .data(donations)
+                    .enter()
+                    .append('svg')
+                    .classed('chart', true)
+                    .attr('width', width)
+                    .attr('height', height);
+
+                var g = svg
+                    .append('g')
+                    .attr('transform', translate);
+
+                var path = g
+                    .selectAll('path')
+                    .data(function (party) {
+                        return pieGenerator(party.donors)
+                    })
+                    .enter()
+                    .append('path')
+                    .attr('d', arcGenerator)
+                    .attr('fill', function (donor) {
+                        return colors(donor.data.name)
+                    });
+
+                var title = path
+                    .append('title')
+                    .text(function (donor) {
+                        var value = formatCurrency(donor.value);
+
+                        return '{name}: {value} €'
+                            .replace('{name}', donor.data.name)
+                            .replace('{value}', value);
+                    });
+            });
         });
     });
 })();
