@@ -46,6 +46,7 @@
     width: 100%;
     outline: none;
     font-family: "Roboto", sans-serif;
+    color: $light-grey;
   }
 
 
@@ -82,10 +83,10 @@
     transition  : all 0.2s ease-out 0s;
     border-image: none;
     border-style: none none solid;
-    border-bottom: 1px solid #bdbdbd;;
+    border-bottom: 1px solid #bdbdbd;
     border-radius: 0;
 
-    color      : $primary;
+    color      : $light-grey;
     cursor     : pointer;
     font-size  : 12px;
     height     : 25px;
@@ -112,7 +113,7 @@
     }
   }
   label {
-    color: #bdbdbd;
+    color: $light-grey;
     font-size: 10px;
     cursor: text;
     left: 0;
@@ -225,7 +226,7 @@ nav#tabs {
 
 form#filter {
   position: absolute;
-  top: 20px;
+  top: 80px;
   left: 300px;
   right : 300px;
 
@@ -237,7 +238,7 @@ form#filter {
 }
 
 
-form {
+/*form {
   .input-field {
     position: relative;
     display: inline;
@@ -248,10 +249,14 @@ form {
     }
   }
 
+  .select-field {
+
+  }
+
   select {
     width : 250px !important;
   }
-}
+}*/
 
 header::before {
   background-color : $primary-dark;
@@ -273,13 +278,15 @@ table.striped {
   width:100%;
   border-spacing: 0;
   border-collapse: separate;
+  font-size:12px;
 
   thead {
     th {
       color : $light-grey;
       text-transform: uppercase;
-      font-size:12px;
+      font-size:9px;
       text-align: left;
+      padding: 4px;
     }
   }
 
@@ -410,5 +417,22 @@ section#seatsAgh {
         }
       }
     }
+  }
+}
+
+
+
+form.inline-form {
+  .select-field, .input-field, button {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  select, input {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 30px;
+    width: 250px !important;
   }
 }
