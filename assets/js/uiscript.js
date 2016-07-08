@@ -5,7 +5,9 @@
         var tabitems        = "nav#tabs ul li",
             body            = "body",
             aghSeats        = "#seatsAgh",
-            form            = "#filter";
+            form            = "#filter",
+            top5            = "#top5",
+            keyfacts        = "#keyfacts";
 
         $(body).on("click", tabitems, function() {
 
@@ -18,7 +20,7 @@
             var content = $(this).attr("data-target");
             $("#"+content).removeClass("hidden");
 
-            if($(aghSeats).is(":visible") == true) {
+            if($(aghSeats).is(":visible") == true || $(top5).is(":visible") == true || $(keyfacts).is(":visible")) {
                 $(form).addClass("hidden");
             } else {
                 $(form).removeClass("hidden");

@@ -384,5 +384,9 @@ function formatCurrency (value) {
 
             });
         });
+
+
+        $(".loadanimation").fadeOut("slow");
+
     });
 })();
