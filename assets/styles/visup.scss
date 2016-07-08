@@ -1,6 +1,5 @@
 
 @import "settings";
-@import "district";
 
 
 .hidden {
@@ -500,8 +499,8 @@ form.inline-form {
 .tooltip {
   padding: 5px 10px;
   border-radius: 2px;
-  position: absolute;
-  top: 310px;
+  position: fixed;
+  top: 290px;
   font-family: "Roboto Slab", serif;
   background-color: $primary;
   color : $light-blue;
@@ -510,8 +509,8 @@ form.inline-form {
 
 
 .loadanimation {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
   padding: 0;
   display: flex;
@@ -547,4 +546,13 @@ form.inline-form {
     transform: scale(0.8);
     opacity: 0.5;
   }
+}
+
+#map {
+  margin-left: calc(50% - 300px);
+}
+
+#map path {
+  stroke: #3D3D3D;
+  stroke-width: .5;
 }
