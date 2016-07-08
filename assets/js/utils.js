@@ -27,3 +27,14 @@ function formatCurrency (value) {
 
     return groups.join('.') + ',' + decimal;
 }
+
+String.prototype.render = function (context) {
+    var rendered = this, variable;
+
+    _.forEach(context, function (value, key) {
+        variable = '{?}'.replace('?', key);
+        rendered = rendered.replace(variable, value);
+    });
+
+    return rendered;
+};
