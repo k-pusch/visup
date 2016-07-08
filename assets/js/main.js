@@ -278,6 +278,8 @@ function formatCurrency (value) {
                 .on('mouseenter', function (district) {
                     var total = formatCurrency(totals[district.id] || 0);
                     tooltip.classed("hidden", false).html(district.name+ ": "+ total + " €");
+                .on('mouseleave', function () {
+                    tooltip.classed('hidden', true);
                 });
 
 
