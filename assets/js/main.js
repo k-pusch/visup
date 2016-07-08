@@ -275,7 +275,7 @@ function formatCurrency (value) {
 
                     return 'fill: rgb(255, #, #)'.replace(/#/g, value)
                 })
-                .on('mousemove', function (district) {
+                .on('mouseenter', function (district) {
                     var total = formatCurrency(totals[district.id] || 0);
                     tooltip.classed("hidden", false).html(district.name+ ": "+ total + " €");
                 });
