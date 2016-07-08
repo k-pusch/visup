@@ -107,13 +107,24 @@
                     };
                 });
 
-                var width = 300,
-                    height = 300,
+                var width = 400,
+                    height = 400,
                     radius = Math.min(width, height) / 2,
                     translate = 'translate(x, y)'.replace('x', String(width / 2)).replace('y', String(height / 2)),
-                    colors = d3.scale.ordinal().range(['#ffebee', '#ef9a9a', '#e57373', '#ef5350', '#d32f2f']),
+                    colors = {
+                        'SPD'           : d3.scale.ordinal().range(['#ffebee', '#ef9a9a', '#e57373', '#ef5350', '#d32f2f']),
+                        'CDU'           : d3.scale.ordinal().range(['#212121', '#424242', '#616161', '#757575', '#9E9E9E']),
+                        'GRÜNE'         : d3.scale.ordinal().range(['#33691E', '#558B2F', '#689F38', '#7CB342', '#8BC34A']),
+                        'PDS'           : d3.scale.ordinal().range(['#4A148C', '#6A1B9A', '#7B1FA2', '#8E24AA', '#BA68C8']),
+                        'LINKE'         : d3.scale.ordinal().range(['#5E35B1', '#7E57C2', '#9575CD', '#B39DDB', '#D1C4E9']),
+                        'AFD'           : d3.scale.ordinal().range(['#039BE5', '#03A9F4', '#4FC3F7', '#81D4FA', '#B3E5FC']),
+                        'FDP'           : d3.scale.ordinal().range(['#F57F17', '#FBC02D', '#FDD835', '#FFEB3B', '#FFF59D']),
+                        'PRO D'         : d3.scale.ordinal().range(['#004D40', '#00796B', '#009688', '#4DB6AC', '#B2DFDB']),
+                        'CSU'           : d3.scale.ordinal().range(['#0D47A1', '#1565C0', '#1976D2', '#1E88E5', '#2196F3']),
+                        'DIE PARTEI'    : d3.scale.ordinal().range(['#E64A19', '#BF360C', '#FF5722', '#FF7043', '#FFAB91'])
+                    },
                     pieGenerator = d3.layout.pie().value(function (donor) { return donor.value }),
-                    arcGenerator = d3.svg.arc().outerRadius(radius).innerRadius(radius * 0.6),
+                    arcGenerator = d3.svg.arc().outerRadius(radius).innerRadius(radius * 0.7),
                     legendRectSize = 18,
                     legendSpacing = 4;
 
@@ -167,7 +178,7 @@
                     .attr('transform', function (donor, index) {
                         var height = legendRectSize + legendSpacing,
                             offset = height * donor.count / 2,
-                            x = -2 * legendRectSize,
+                            x = -5 * legendRectSize,
                             y = index * height - offset;
 
                         return 'translate(x, y)'
