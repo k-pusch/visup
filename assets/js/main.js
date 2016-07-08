@@ -277,11 +277,16 @@ function formatCurrency (value) {
                 })
                 .on('mouseenter', function (district) {
                     var total = formatCurrency(totals[district.id] || 0);
-                    tooltip.classed("hidden", false).html(district.name+ ": "+ total + " €");
+
+                    tooltip.classed('hidden', false).html(
+                        '{name}: {total} €'
+                            .replace('{name}', district.name)
+                            .replace('{total}', total)
+                    );
+                })
                 .on('mouseleave', function () {
                     tooltip.classed('hidden', true);
                 });
-
 
             _.defer(function () {
                 var parties = dataStore.getFilterValues('party');
@@ -305,19 +310,15 @@ function formatCurrency (value) {
                     };
                 });
 
-
-
-
                 var width = 300,
                     height = 300,
                     radius = Math.min(width, height) / 2,
-                    translate = 'translate(x,y)'.replace('x', String(width / 2)).replace('y', String(height / 2)),
-                    colors = d3.scale.ordinal().range(["#ffebee", "#ef9a9a", "#e57373", "#ef5350", "#d32f2f"]),
+                    translate = 'translate(x, y)'.replace('x', String(width / 2)).replace('y', String(height / 2)),
+                    colors = d3.scale.ordinal().range(['#ffebee', '#ef9a9a', '#e57373', '#ef5350', '#d32f2f']),
                     pieGenerator = d3.layout.pie().value(function (donor) { return donor.value }),
                     arcGenerator = d3.svg.arc().outerRadius(radius).innerRadius(radius * 0.6),
                     legendRectSize = 18,
                     legendSpacing = 4;
-
 
                 var top5 = d3.select('#top5');
 
@@ -356,20 +357,21 @@ function formatCurrency (value) {
                             .replace('{value}', value);
                     });
 
-
-                
                 var legend = g
                     .selectAll('.legend')
                     .data(colors.domain())
                     .enter()
                     .append('g')
                     .classed('legend', true)
-                    .attr('transform', function(d,i) {
-                        var height = legendRectSize + legendSpacing;
-                        var offset =  height * colors.domain().length / 2;
-                        var horz = -2 * legendRectSize;
-                        var vert = i * height - offset;
-                        return 'translate(' + horz + ',' + vert + ')';
+                    .attr('transform', function (d, i) {
+                        var height = legendRectSize + legendSpacing,
+                            offset = height * colors.domain().length / 2,
+                            x = -2 * legendRectSize,
+                            y = i * height - offset;
+
+                        return 'translate(x, y)'
+                            .replace('x', String(x))
+                            .replace('y', String(y));
                     });
 
                 legend.append('rect')
@@ -381,14 +383,13 @@ function formatCurrency (value) {
                 legend.append('text')
                     .attr('x', legendRectSize + legendSpacing)
                     .attr('y', legendRectSize - legendSpacing)
-                    .text(function(d) { return d; });
-
+                    .text(function (d) {
+                        return d;
+                    });
 
             });
         });
 
-
-        $(".loadanimation").fadeOut("slow");
-
+        $('.loadanimation').fadeOut('slow');
     });
 })();
