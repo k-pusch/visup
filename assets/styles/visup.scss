@@ -482,7 +482,17 @@ form.inline-form {
 
 
 #top5 {
+
   svg.chart {
-    margin : 10px 80px;
+    margin : 10px 70px;
   }
+
+  .legend {
+    font-size: 12px;
+  }
+
+  rect {
+    stroke-width: 2;
+  }
+
 }
