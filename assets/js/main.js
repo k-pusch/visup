@@ -359,15 +359,19 @@ function formatCurrency (value) {
 
                 var legend = g
                     .selectAll('.legend')
-                    .data(colors.domain())
+                    .data(function (party) {
+                        return party.donors.map(function (donor, index, donors) {
+                            return {party: party.name, name: donor.name, count: donors.length}
+                        });
+                    })
                     .enter()
                     .append('g')
                     .classed('legend', true)
-                    .attr('transform', function (d, i) {
+                    .attr('transform', function (donor, index) {
                         var height = legendRectSize + legendSpacing,
-                            offset = height * colors.domain().length / 2,
+                            offset = height * donor.count / 2,
                             x = -2 * legendRectSize,
-                            y = i * height - offset;
+                            y = index * height - offset;
 
                         return 'translate(x, y)'
                             .replace('x', String(x))
@@ -377,16 +381,19 @@ function formatCurrency (value) {
                 legend.append('rect')
                     .attr('width', legendRectSize)
                     .attr('height', legendRectSize)
-                    .style('fill', colors)
-                    .style('stroke', colors);
+                    .style('fill', function (donor) {
+                        return colors(donor.name);
+                    })
+                    .style('stroke', function (donor) {
+                        return colors(donor.name);
+                    });
 
                 legend.append('text')
                     .attr('x', legendRectSize + legendSpacing)
                     .attr('y', legendRectSize - legendSpacing)
-                    .text(function (d) {
-                        return d;
+                    .text(function (donor) {
+                        return donor.name;
                     });
-
             });
         });
 
