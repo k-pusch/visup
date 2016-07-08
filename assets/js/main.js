@@ -146,13 +146,15 @@
                 var path = g
                     .selectAll('path')
                     .data(function (party) {
-                        return pieGenerator(party.donors)
+                        return pieGenerator(party.donors.map(function (donor) {
+                            return _.assign({party: party.party}, donor);
+                        }));
                     })
                     .enter()
                     .append('path')
                     .attr('d', arcGenerator)
                     .attr('fill', function (donor) {
-                        return colors(donor.data.name)
+                        return colors[donor.data.party](donor.data.name)
                     });
 
                 var title = path
@@ -169,7 +171,7 @@
                     .selectAll('.legend')
                     .data(function (party) {
                         return party.donors.map(function (donor, index, donors) {
-                            return {party: party.name, name: donor.name, count: donors.length}
+                            return {party: party.party, name: donor.name, count: donors.length}
                         });
                     })
                     .enter()
@@ -190,10 +192,10 @@
                     .attr('width', legendRectSize)
                     .attr('height', legendRectSize)
                     .style('fill', function (donor) {
-                        return colors(donor.name);
+                        return colors[donor.party](donor.name);
                     })
                     .style('stroke', function (donor) {
-                        return colors(donor.name);
+                        return colors[donor.party](donor.name);
                     });
 
                 legend.append('text')
