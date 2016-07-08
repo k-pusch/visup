@@ -89,7 +89,10 @@ var DataStore = (function (_, data) {
         typ: function (value) {
             return mapping.typ[value];
         },
-        year: function (compare) {
+        year: function (value) {
+            return mapping.year[value];
+        },
+        limitYear: function (compare) {
             var values = mapping.year,
                 years = Object.keys(values).filter(compare);
 
@@ -103,10 +106,10 @@ var DataStore = (function (_, data) {
             })
         },
         minYear: function (value) {
-            return filters.year(function (year) { return year >= value});
+            return filters.limitYear(function (year) { return year >= value});
         },
         maxYear: function (value) {
-            return filters.year(function (year) { return year <= value});
+            return filters.limitYear(function (year) { return year <= value});
         },
         district: function (value) {
             return mapping.district[value];
