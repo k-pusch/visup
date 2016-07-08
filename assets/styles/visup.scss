@@ -364,67 +364,67 @@ section#seatsAgh {
   ul:first-of-type {
     margin-top:60px;
   }
+}
 
 
-  aside.legend {
-    position : fixed;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.26);
-    width : 300px;
-    padding: 10px;
-    left: 20px;
-    bottom: 50px;
+aside.legend {
+  position : fixed;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.26);
+  width : 300px;
+  padding: 10px;
+  left: 20px;
+  bottom: 50px;
 
-    h4 {
-      color : $primary-dark;
-      font-family: "Roboto Slab", serif;
-      margin: 0 10px 5px;
-    }
-    
-    ul {
-      margin-top : 0 !important;
-      height : auto !important;
-      padding: 0;
+  h4 {
+    color : $primary-dark;
+    font-family: "Roboto Slab", serif;
+    margin: 0 10px 5px;
+  }
 
-      li {
-        list-style: none;
-        padding: 5px;
-        margin: 3px;
-        width: 40%;
+  ul {
+    margin-top : 0 !important;
+    height : auto !important;
+    padding: 0;
 
-        &.spd {
-          border-left: 5px solid $spd;
-        }
+    li {
+      list-style: none;
+      padding: 5px;
+      margin: 3px;
+      width: 40% !important;
+      float:left;
 
-
-
-        &.cdu {
-          border-left: 5px solid $cdu;
-        }
+      &.spd {
+        border-left: 5px solid $spd;
+      }
 
 
-        &.piraten {
-          border-left: 5px solid $piraten;
-        }
+
+      &.cdu {
+        border-left: 5px solid $cdu;
+      }
 
 
-        &.fdp {
-          border-left: 5px solid $fdp;
-        }
+      &.piraten {
+        border-left: 5px solid $piraten;
+      }
 
 
-        &.linke {
-          border-left: 5px solid $linke;
-        }
+      &.fdp {
+        border-left: 5px solid $fdp;
+      }
 
-        &.gruene {
-          border-left: 5px solid $gruene;
-        }
+
+      &.linke {
+        border-left: 5px solid $linke;
+      }
+
+      &.gruene {
+        border-left: 5px solid $gruene;
       }
     }
   }
 }
-
 
 
 form.inline-form {
