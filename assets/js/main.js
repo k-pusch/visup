@@ -260,6 +260,8 @@ function formatCurrency (value) {
                 values = _.values(totals),
                 max = _.max(values);
 
+            var tooltip = d3.select('#district').append('div').classed('tooltip hidden', true);
+
             paths.enter().append('path')
                 .attr('d', function (district) {
                     return path(district.bounds)
@@ -273,12 +275,9 @@ function formatCurrency (value) {
 
                     return 'fill: rgb(255, #, #)'.replace(/#/g, value)
                 })
-                .append('title').text(function (district) {
+                .on('mousemove', function (district) {
                     var total = formatCurrency(totals[district.id] || 0);
-
-                    return '{name}: {total} €'
-                        .replace('{name}', district.name)
-                        .replace('{total}', total);
+                    tooltip.classed("hidden", false).html(district.name+ ": "+ total + " €");
                 });
 
 
@@ -356,6 +355,7 @@ function formatCurrency (value) {
                     });
 
 
+                
                 var legend = g
                     .selectAll('.legend')
                     .data(colors.domain())

@@ -482,7 +482,6 @@ form.inline-form {
 
 
 #top5 {
-
   svg.chart {
     margin : 10px 70px;
   }
@@ -494,8 +493,20 @@ form.inline-form {
   rect {
     stroke-width: 2;
   }
-
 }
+
+
+
+.tooltip {
+  padding: 5px 10px;
+  border-radius: 2px;
+  position: absolute;
+  top: 310px;
+  font-family: "Roboto Slab", serif;
+  background-color: $primary;
+  color : $light-blue;
+}
+
 
 
 .loadanimation {
