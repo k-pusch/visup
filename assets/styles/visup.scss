@@ -482,7 +482,7 @@ form.inline-form {
 
 #top5 {
   svg.chart {
-    margin : 10px 70px;
+    margin : 30px 55px 10px;
   }
 
   .legend {
@@ -555,4 +555,11 @@ form.inline-form {
 #map path {
   stroke: #3D3D3D;
   stroke-width: .5;
+}
+
+
+.headline {
+  font-size: 22px;
+  font-family: "Roboto Slab", serif;
+  fill: $primary-dark;
 }
