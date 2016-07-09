@@ -26,11 +26,11 @@ var Filter = React.createClass({
 
     renderFilter: function (name) {
         var config = this.filters[name],
-            id = '{name}-filter'.render({name: name});
+            id = '{name}-filter'.render({name: name}),
+            selected = this.state.selection[name] || '';
 
         if (config.className === 'select-field') {
-            var options = this.renderOptions.apply(this, config.options),
-                selected = this.state.selection[name] || '';
+            var options = this.renderOptions.apply(this, config.options);
 
             return (
                 <div key={id} className={config.className}>
@@ -44,7 +44,7 @@ var Filter = React.createClass({
         } else {
             return (
                 <div key={id} className={config.className}>
-                    <input id={id} name={name} type="text" onChange={this.onChange} />
+                    <input id={id} name={name} type="text" onChange={this.onChange} value={selected} />
                     <label for={id}>{config.label}</label>
                 </div>
             )

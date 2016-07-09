@@ -76,22 +76,35 @@
 
     $tabs.on('click', 'li', function (event) {
         var $tab = $(event.target),
-            target = $tab.data('target'),
-            section = sections[target],
-            requiredFilters = section.requiredFilters;
+            target = $tab.data('target');
 
         if (target === activeSection) return;
+
+        var currentSection = sections[activeSection],
+            targetSection = sections[target],
+            requiredFilters = targetSection.requiredFilters;
+
+        activeSection = target;
 
         $tabs.find('li').removeClass('active');
         $tab.addClass('active');
 
-        section.update(_filters);
         filterComponent.setFilters(requiredFilters);
 
-        sections[activeSection].hide();
-        section.show();
+        if (requiredFilters.length) {
+            var filters = _.mapValues(_filters, function (value, key) {
+                if (_.includes(requiredFilters, key)) {
+                    return value;
+                } else {
+                    return null;
+                }
+            });
 
-        activeSection = target;
+            setFilters(filters);
+        }
+
+        currentSection.hide();
+        targetSection.show();
     });
 
     wait(reactComponents);
