@@ -28,7 +28,7 @@ var DistrictSection = function (node, dataStore, geoStore) {
             return path(district.bounds)
         })
         .attr('id', function (district) {
-            return 'district-?'.replace('?', district.id);
+            return 'district-{id}'.render({id: district.id});
         })
         .attr('style', function (district) {
             var total = totals[district.id] || 0,
@@ -40,9 +40,7 @@ var DistrictSection = function (node, dataStore, geoStore) {
             var total = formatCurrency(totals[district.id] || 0);
 
             tooltip.classed('hidden', false).html(
-                '{name}: {total} €'
-                    .replace('{name}', district.name)
-                    .replace('{total}', total)
+                '{name}: {total} €'.render({name: district.name, total: total})
             );
         })
         .on('mouseleave', function () {

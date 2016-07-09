@@ -33,7 +33,7 @@ String.prototype.render = function (context) {
 
     _.forEach(context, function (value, key) {
         variable = '{?}'.replace('?', key);
-        rendered = rendered.replace(variable, value);
+        rendered = rendered.replace(variable, String(value));
     });
 
     return rendered;

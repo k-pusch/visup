@@ -25,7 +25,7 @@ var TopFiveSection = function (node, dataStore, geoStore) {
     var width = 400,
         height = 400,
         radius = Math.min(width, height) / 2,
-        translate = 'translate(x, y)'.replace('x', String(width / 2)).replace('y', String(height / 2)),
+        translate = 'translate({x}, {y})'.render({x: width / 2, y: height / 2}),
         colors = {
             'SPD'           : d3.scale.ordinal().range(['#d32f2f', '#ef5350', '#e57373', '#ef9a9a', '#ffebee']),
             'CDU'           : d3.scale.ordinal().range(['#212121', '#424242', '#616161', '#757575', '#9E9E9E']),
@@ -76,11 +76,11 @@ var TopFiveSection = function (node, dataStore, geoStore) {
         .on('mouseenter', function (donor) {
             var value = formatCurrency(donor.value);
 
-            tooltip.classed('hidden', false).html(
-                '{name}: {value} €'
-                    .replace('{name}', donor.data.name)
-                    .replace('{value}', value)
-            )
+            tooltip
+                .classed('hidden', false)
+                .html('{name}: {value} €'.render({
+                    name: donor.data.name, value: value
+                }))
         })
         .on('mouseleave', function () {
             tooltip.classed('hidden', true);
@@ -97,9 +97,7 @@ var TopFiveSection = function (node, dataStore, geoStore) {
             var x = -40,
                 y = 0;
 
-            return 'translate(x,y)'
-                .replace('x', String(x))
-                .replace('y', String(y));
+            return 'translate({x}, {y})'.render({x: x, y: y})
         })
         .classed('headline', true);
 
@@ -119,9 +117,7 @@ var TopFiveSection = function (node, dataStore, geoStore) {
                 x = -4 * legendRectSize,
                 y = index * height - offset;
 
-            return 'translate(x, y)'
-                .replace('x', String(x))
-                .replace('y', String(y));
+            return 'translate({x}, {y})'.render({x: x, y: y})
         });
 
     legend.append('rect')
