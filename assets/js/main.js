@@ -70,6 +70,8 @@
         _filters = _.assign(_filters, filters);
 
         sections[activeSection].update(_filters);
+
+        filterComponent.setSelection(_filters);
     }
 
     $tabs.on('click', 'li', function (event) {

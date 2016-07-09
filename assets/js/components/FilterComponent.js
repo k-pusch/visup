@@ -11,7 +11,8 @@ var Filter = React.createClass({
 
     getInitialState: function() {
         return {
-            filters: this.props.initialFilters
+            filters: this.props.initialFilters,
+            selection: {}
         };
     },
 
@@ -28,11 +29,12 @@ var Filter = React.createClass({
             id = '{name}-filter'.render({name: name});
 
         if (config.className === 'select-field') {
-            var options = this.renderOptions.apply(this, config.options);
+            var options = this.renderOptions.apply(this, config.options),
+                selected = this.state.selection[name] || '';
 
             return (
                 <div className={config.className}>
-                    <select id={id} name={name} onChange={this.onChange}>
+                    <select id={id} name={name} value={selected} onChange={this.onChange}>
                         <option value="">Alle</option>
                         {options}
                     </select>
@@ -72,6 +74,10 @@ var Filter = React.createClass({
 
     setFilters: function (filters) {
         this.setState({filters: filters}, null);
+    },
+
+    setSelection: function (selection) {
+        this.setState({selection: selection}, null);
     }
 
 });
