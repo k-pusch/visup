@@ -33,7 +33,7 @@ var Filter = React.createClass({
                 selected = this.state.selection[name] || '';
 
             return (
-                <div className={config.className}>
+                <div key={id} className={config.className}>
                     <select id={id} name={name} value={selected} onChange={this.onChange}>
                         <option value="">Alle</option>
                         {options}
@@ -43,7 +43,7 @@ var Filter = React.createClass({
             )
         } else {
             return (
-                <div className={config.className}>
+                <div key={id} className={config.className}>
                     <input id={id} name={name} type="text" onChange={this.onChange} />
                     <label for={id}>{config.label}</label>
                 </div>
