@@ -30,11 +30,11 @@
         </header>
 
         <main>
-            <section class="" id="table"></section>
-            <section class="hidden" id="district">
+            <section class="" id="table" data-component="TableSection"></section>
+            <section class="hidden" id="district" data-component="DistrictSection">
                 <svg id="map" width="600" height="500"></svg>
             </section>
-            <section class="hidden" id="history">
+            <section class="hidden" id="history" data-component="HistorySection">
                 <aside class="legend">
                     <h4> Legende </h4>
 
@@ -65,7 +65,7 @@
                     <!-- HIER SOLL DAS DIAGRAMM HIN -->
                 </article>
             </section>
-            <section class="hidden" id="keyfacts">
+            <section class="hidden" id="keyfacts" data-component="KeyFactsSection">
                 <div class="flex-container">
                     <div class="flex-item yellow">
                         <h3> Größte Einzelspende </h3>
@@ -127,8 +127,8 @@
                 </div>
 
             </section>
-            <section class="hidden" id="top5"></section>
-            <section class="hidden" id="seatsAgh">
+            <section class="hidden" id="top5" data-component="TopFiveSection"></section>
+            <section class="hidden" id="seatsAgh" data-component="SeatsSection">
                 <aside class="legend">
                     <h4> Legende </h4>
 
@@ -200,11 +200,19 @@
         <script type="text/javascript" src="assets/js/data/DataStore.js"></script>
 
         <!-- components -->
-        <script type="text/babel" src="assets/js/components/DataTableComponent.js"></script>
-        <script type="text/babel" src="assets/js/components/FilterComponent.js"></script>
+        <script type="text/babel" src="assets/js/components/DataTableComponent.js" data-component="DataTable"></script>
+        <script type="text/babel" src="assets/js/components/FilterComponent.js" data-component="Filter"></script>
+
+        <!-- sections -->
+        <script type="text/javascript" src="assets/js/sections/base.js"></script>
+        <script type="text/javascript" src="assets/js/sections/district.js"></script>
+        <script type="text/javascript" src="assets/js/sections/history.js"></script>
+        <script type="text/javascript" src="assets/js/sections/keyfacts.js"></script>
+        <script type="text/javascript" src="assets/js/sections/seats.js"></script>
+        <script type="text/javascript" src="assets/js/sections/table.js"></script>
+        <script type="text/javascript" src="assets/js/sections/top5.js"></script>
 
         <!-- main -->
         <script type="text/javascript" src="assets/js/main.js"></script>
-        <script type="text/javascript" src="assets/js/uiscript.js"></script>
     </body>
 </html>

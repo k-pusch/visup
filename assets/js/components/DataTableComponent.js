@@ -2,7 +2,6 @@ var DataTable = React.createClass({
 
     getInitialState: function() {
         return {
-            dataStore: null,
             filters: {}
         };
     },
@@ -19,26 +18,18 @@ var DataTable = React.createClass({
         return value;
     },
 
-    updateFilters: function (filter) {
+    updateFilters: function (filters) {
         this.setState({
-            filters: _.extend(this.state.filters, filter)
+            filters: filters
         }, null);
     },
 
     getEntries: function () {
-        var dataStore = this.state.dataStore;
-
-        if (dataStore === null) return [];
-
-        return dataStore.getEntries(this.state.filters);
+        return this.props.dataStore.getEntries(this.state.filters);
     },
 
     getAggregate: function (entries) {
-        var dataStore = this.state.dataStore;
-
-        if (dataStore === null) return 0.00;
-
-        return dataStore.aggregate.entries(entries);
+        return this.props.dataStore.aggregate.entries(entries);
     },
 
     render: function() {
@@ -84,15 +75,6 @@ var DataTable = React.createClass({
                 </tbody>
             </table>
         );
-    },
-
-    componentDidMount: function () {
-        var self = this;
-
-        DataStore.onReady(function (dataStore) {
-            self.setState({
-                dataStore: dataStore
-            }, null);
-        });
     }
+
 });
