@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+    <head>
+        <meta charset="UTF-8" />
+        <title>VISUP</title>
+
+        <link href='//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,100,700' rel='stylesheet' type='text/css'>
+        <link href='../assets/styles/visup.css' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="loadanimation">
+            <div class="loader">
+                <span>{</span><span>}</span>
+            </div>
+        </div>
+
+        <header>
+            <a href="../"> <img id="logo" src="../assets/images/logo.png" alt="VISUP Medieninformatik est. 2016" /> </a>
+            <form id="filter" class="inline-form"></form>
+            <nav id="tabs">
+                <ul>
+                    <li data-target="table" class="active"> Tabelle </li>
+                    <li data-target="history"> Historie </li>
+                    <li data-target="keyfacts"> Keyfacts </li>
+                    <li data-target="top5"> TOP 5 </li>
+                    <li data-target="seatsAgh"> Verteilung Sitze AGH  </li>
+                    <li data-target="district"> Bezirke </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="" id="table" data-component="TableSection"></section>
+            <section class="hidden" id="district" data-component="DistrictSection">
+                <div class="tooltip hidden"></div>
+                <div id="district-map-wrapper"></div>
+            </section>
+            <section class="hidden" id="history" data-component="HistorySection">
+                <aside class="legend">
+                    <h4> Legende </h4>
+
+                    <ul>
+                        <li class="cdu">
+                            CDU
+                        </li>
+                        <li class="gruene">
+                            Die Grünen
+                        </li>
+                        <li class="linke">
+                            Die Linke
+                        </li>
+                        <li class="diepartei">
+                            Die Partei
+                        </li>
+                        <li class="fdp">
+                            FDP
+                        </li>
+                        <li class="prod">
+                            Pro D
+                        </li>
+                        <li class="pds">
+                            PDS
+                        </li>
+                        <li class="spd">
+                            SPD
+                        </li>
+                        <li class="piraten">
+                            Piraten
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+            <section class="hidden" id="keyfacts" data-component="KeyFactsSection">
+                <div class="flex-container">
+                    <div class="flex-item yellow">
+                        <h3> Größte Einzelspende </h3>
+                        <p>
+                            Unternehmer Klaus Krone
+                            309.043,59€
+                            an die CDU
+                        </p>
+                    </div>
+                    <div class="flex-item blue">
+                        <h3> Höchste Einzelspenden Unternehmen </h3>
+                        <p>
+                            184.000,00€ an die CDU
+                            YOC AG (Mobile Advertising)
+                        </p>
+                    </div>
+                    <div class="flex-item  grey">
+                        <h3> Durchschnittliche Spendenhöhe </h3>
+                        <p>
+                            18.654,84 €
+                            (Median: 13.579,00€)
+                        </p>
+                    </div>
+
+                    <div class="flex-item yellow">
+                        <h3> höchste Spendenanzahl </h3>
+                        <p>
+                            16 Einzelspenden <br>
+                            Franz Schulz <br>
+                            ehemalige Bezirksbürgermeister <br>
+                            Friedrichshain - Kreuzberg
+                        </p>
+                    </div>
+                    <div class="flex-item grey">
+                        <h3> Spendenhäufigkeit </h3>
+                        <p> Alle 9 Tage </p>
+                    </div>
+                    <div class="flex-item blue">
+                        <h3> Privat vs. Unternehmen </h3>
+                        <p>
+                            Privatpersonen spenden zusammengerechnet mehr <br>
+                            aber der durchschnittliche Spendenbetrag bei Unternehmen ist höher
+                        </p>
+                    </div>
+                    <div class="flex-item yellow">
+                        <h3> Bekannte Spender </h3>
+                        <p>
+                            Angela&nbsp;Merkel &bull;
+                            Franz&nbsp;Müntefering &bull;
+                            Dr.&nbsp;Guido&nbsp;Westerwelle &bull;
+                            Dr.&nbsp;Frank-Walter&nbsp;Steinmeier &bull;
+                            Gregor&nbsp;Gysi &bull;
+                            Klaus&nbsp;Wowereit &bull;
+                            Claudia&nbsp;Roth &bull;
+                            Jürgen&nbsp;Trittin &bull;
+                            Sahra&nbsp;Wagenknecht
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+            <section class="hidden" id="top5" data-component="TopFiveSection"></section>
+            <section class="hidden" id="seatsAgh" data-component="SeatsSection">
+                <aside class="legend">
+                    <h4> Legende </h4>
+
+                    <ul>
+                        <li class="cdu">
+                            CDU
+                        </li>
+                        <li class="gruene">
+                            Die Grünen
+                        </li>
+                        <li class="linke">
+                            Die Linke
+                        </li>
+                        <li class="diepartei">
+                            Die Partei
+                        </li>
+                        <li class="fdp">
+                            FDP
+                        </li>
+                        <li class="prod">
+                            Pro D
+                        </li>
+                        <li class="pds">
+                            PDS
+                        </li>
+                        <li class="spd">
+                            SPD
+                        </li>
+                        <li class="piraten">
+                            Piraten
+                        </li>
+                    </ul>
+                    </ul>
+                </aside>
+
+                <ul>
+                    <li><img src="../assets/images/agh/1995-donations.png" alt="1995 Wahlen"/></li>
+                    <li><img src="../assets/images/agh/1995-elections.png" alt="1995 Spenden"/></li>
+                </ul>
+                <ul>
+                    <li><img src="../assets/images/agh/1999-donations.png" alt="1999 Wahlen"/></li>
+                    <li><img src="../assets/images/agh/1999-elections.png" alt="1999 Spenden"/></li>
+                </ul>
+                <ul>
+                    <li><img src="../assets/images/agh/2001-donations.png" alt="2001 Wahlen"/></li>
+                    <li><img src="../assets/images/agh/2001-elections.png" alt="2001 Spenden"/></li>
+                </ul>
+                <ul>
+                    <li><img src="../assets/images/agh/2006-donations.png" alt="2006 Wahlen"/></li>
+                    <li><img src="../assets/images/agh/2006-elections.png" alt="2006 Spenden"/></li>
+                </ul>
+                <ul>
+                    <li><img src="../assets/images/agh/2011-donations.png" alt="2011 Wahlen"/></li>
+                    <li><img src="../assets/images/agh/2011-elections.png" alt="2011 Spenden"/></li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <a href="../about/" target="_blank"> Wie wurden die Daten aufbereitet? Und wer steht hinter VISUP? </a>
+        </footer>
+
+        <!-- external -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>
+        <script type="text/javascript" src="https://fb.me/react-15.1.0.min.js"></script>
+        <script type="text/javascript" src="https://fb.me/react-dom-15.1.0.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.10.3/babel.min.js"></script>
+        <script type="text/javascript" src="http://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.4/terraformer.min.js"></script>
+
+        <!-- utils -->
+        <script type="text/javascript" src="../assets/js/utils.js"></script>
+
+        <!-- data -->
+        <script type="text/javascript" src="../assets/js/data/parteispenden.js"></script>
+        <script type="text/javascript" src="../assets/js/data/GEOStore.js"></script>
+        <script type="text/javascript" src="../assets/js/data/DataStore.js"></script>
+
+        <!-- components -->
+        <script type="text/babel" src="../assets/js/components/DataTableComponent.js" data-component="DataTable"></script>
+        <script type="text/babel" src="../assets/js/components/FilterComponent.js" data-component="Filter"></script>
+        <script type="text/babel" src="../assets/js/components/DistrictsComponent.js" data-component="DistrictsComponent"></script>
+
+        <!-- sections -->
+        <script type="text/javascript" src="../assets/js/sections/base.js"></script>
+        <script type="text/javascript" src="../assets/js/sections/district.js"></script>
+        <script type="text/javascript" src="../assets/js/sections/history.js"></script>
+        <script type="text/javascript" src="../assets/js/sections/keyfacts.js"></script>
+        <script type="text/javascript" src="../assets/js/sections/seats.js"></script>
+        <script type="text/javascript" src="../assets/js/sections/table.js"></script>
+        <script type="text/javascript" src="../assets/js/sections/top5.js"></script>
+
+        <!-- main -->
+        <script type="text/javascript" src="../assets/js/main.js"></script>
+        <script type="text/javascript" src="../assets/js/effects.js"></script>
+    </body>
+</html>

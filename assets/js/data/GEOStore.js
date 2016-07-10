@@ -4,7 +4,7 @@ var GEOStore = (function ($, d3) {
         districts = null;
 
     var promise = new Promise(function (resolve, reject) {
-        d3.json('assets/js/data/berlin-bezirke.geojson', function (error, geodata) {
+        d3.json('../assets/js/data/berlin-bezirke.geojson', function (error, geodata) {
             if (error) return reject(error);
 
             var latitudes = [], longitudes = [];
