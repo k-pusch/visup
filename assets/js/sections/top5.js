@@ -22,8 +22,8 @@ var TopFiveSection = function (node, dataStore, geoStore) {
         };
     });
 
-    var width = 400,
-        height = 400,
+    var width = 350,
+        height = 350,
         radius = Math.min(width, height) / 2,
         translate = 'translate({x}, {y})'.render({x: width / 2, y: height / 2}),
         colors = {
@@ -95,7 +95,7 @@ var TopFiveSection = function (node, dataStore, geoStore) {
         .attr('y', 130)
         .attr('transform', function () {
             var x = -40,
-                y = 0;
+                y = -20;
 
             return 'translate({x}, {y})'.render({x: x, y: y})
         })

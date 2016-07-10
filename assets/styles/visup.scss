@@ -173,7 +173,7 @@ body {
 
 
 header {
-  height : 200px;
+  height : 140px;
   width  : 100%;
   background-color : $primary;
   color : $light-blue;
@@ -188,13 +188,13 @@ header {
   }
 
   #logo {
-    width: 170px;
-    margin: 20px 30px 20px 30px;
+    width: 120px;
+    margin: 8px 30px 20px 30px;
   }
 }
 
 main {
-  padding-top: 280px;
+  padding-top: 200px;
 }
 
 nav#tabs {
@@ -230,7 +230,7 @@ nav#tabs {
 
 form#filter {
   position: absolute;
-  top: 80px;
+  top: 50px;
   left: 300px;
   right : 300px;
 
@@ -275,7 +275,7 @@ header::before {
 
 
 section {
-  padding: 10px 50px;
+  padding: 30px 50px;
 }
 
 table.striped {
@@ -452,7 +452,7 @@ form.inline-form {
     display: inline-block;
     vertical-align: middle;
     margin-right: 30px;
-    width: 250px !important;
+    width: 200px !important;
   }
 }
 
@@ -496,8 +496,10 @@ form.inline-form {
 
 
 #top5 {
+  text-align: center;
+
   svg.chart {
-    margin : 30px 55px 10px;
+    margin : 30px 40px 10px;
   }
 
   .legend {
