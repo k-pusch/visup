@@ -372,8 +372,8 @@ aside.legend {
   box-shadow: 0 2px 5px rgba(0,0,0,0.26);
   width : 300px;
   padding: 10px;
-  left: 20px;
-  bottom: 50px;
+  right: 20px;
+  font-size: 12px;
 
   h4 {
     color : $primary-dark;
@@ -390,7 +390,7 @@ aside.legend {
       list-style: none;
       padding: 5px;
       margin: 3px;
-      width: 40% !important;
+      width: 20% !important;
       float:left;
 
       &.spd {
@@ -404,8 +404,8 @@ aside.legend {
       }
 
 
-      &.piraten {
-        border-left: 5px solid $piraten;
+      &.diepartei {
+        border-left: 5px solid $diepartei;
       }
 
 
@@ -420,6 +420,18 @@ aside.legend {
 
       &.gruene {
         border-left: 5px solid $gruene;
+      }
+
+      &.afd {
+        border-left: 5px solid $afd;
+      }
+
+      &.pds {
+        border-left: 5px solid $pds;
+      }
+
+      &.prod {
+        border-left: 5px solid $prod;
       }
     }
   }
@@ -562,4 +574,25 @@ form.inline-form {
   font-size: 22px;
   font-family: "Roboto Slab", serif;
   fill: $primary-dark;
+}
+
+
+#history {
+  svg {
+    margin-left : calc(50% - 515px);
+  }
+
+  path {
+    stroke: $primary;
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
 }

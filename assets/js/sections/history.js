@@ -2,16 +2,16 @@ var HistorySection = function (node, dataStore, geoStore) {
     BaseSection.call(this, node, dataStore, geoStore);
 
     var colors = {
-        'SPD': '#d32f2f',
+        'SPD': '#ef9a9a',
         'CDU': '#212121',
-        'GRÜNE': '#33691E',
-        'PDS': '#4A148C',
-        'LINKE': '#5E35B1',
+        'GRÜNE': '#689F38',
+        'PDS': '#7B1FA2',
+        'LINKE': '#9575CD',
         'AFD': '#81D4FA',
-        'FDP': '#F57F17',
+        'FDP': '#FDD835',
         'PRO D': '#004D40',
-        'CSU': '#0D47A1',
-        'DIE PARTEI': '#E64A19'
+        'CSU': '#1976D2',
+        'DIE PARTEI': '#FF7043'
     };
 
     var years = dataStore.getFilterValues('year', 'value', 'asc').map(function (year) {
