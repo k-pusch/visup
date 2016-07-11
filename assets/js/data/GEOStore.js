@@ -1,9 +1,9 @@
-var GEOStore = (function ($, d3) {
+var GEOStore = (function ($, d3, data) {
 
     var center = null,
         districts = null;
 
-    var promise = new Promise(function (resolve, reject) {
+    var init = function (resolve, reject) {
         d3.json('../assets/js/data/berlin-bezirke.geojson', function (error, geodata) {
             if (error) return reject(error);
 
@@ -40,7 +40,21 @@ var GEOStore = (function ($, d3) {
 
             return resolve(true);
         });
-    });
+    };
+
+    if (data) {
+        center = data.center;
+        districts = data.districts;
+
+        init = function (resolve) {
+            _.defer(function () {
+                return resolve(true);
+            });
+        }
+
+    }
+
+    var promise = new Promise(init);
 
     promise.then(null, function (error) {
         console.error(error);
@@ -87,4 +101,4 @@ var GEOStore = (function ($, d3) {
         onReady: onReady
     }
 
-})(jQuery, d3);
+})(jQuery, d3, geoData);
