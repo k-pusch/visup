@@ -19,8 +19,10 @@ JSX_COMPILER = 'babel'
 EXCLUDE = {
     'node_modules',
     'preprocessing',
+    'package.json',
     '.zip',
-    '.py'
+    '.py',
+    '.iml',
 }
 
 
@@ -68,14 +70,29 @@ def exclude(root, *path):
     absolute = os.path.join(*path)
     relative = os.path.relpath(absolute, root)
 
-    if any(relative.startswith(excl) for excl in EXCLUDE if not excl.startswith('.')):
-        return True
-
-    if os.path.isfile(absolute):
+    if os.path.isdir(absolute):
+        name, extension = os.path.basename(absolute), None
+    elif os.path.isfile(absolute):
         filename = os.path.basename(absolute)
         name, extension = os.path.splitext(filename)
+    else:
+        return True
 
-        return name.startswith('.') or extension in EXCLUDE
+    if relative.startswith('.') and not relative == '.':
+        return True
+
+    if name.startswith('.') and not name == '.':
+        return True
+
+    if extension in EXCLUDE:
+        return True
+
+    if extension in COMPILERS:
+        return True
+
+    for excl in EXCLUDE:
+        if relative.startswith(excl):
+            return True
 
     return False
 
