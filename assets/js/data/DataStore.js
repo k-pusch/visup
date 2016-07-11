@@ -190,7 +190,20 @@ var DataStore = (function (_, data) {
         });
     };
 
+    var dump = function () {
+        var computed = {
+            entries: data,
+            mapping: mapping,
+            options: options
+        };
+
+        var string = JSON.stringify(computed);
+
+        console.log(string);
+    };
+
     var methods = {
+        dump: dump,
         getEntries: getEntries,
         getFilterValues: getFilterValues,
         aggregate: {

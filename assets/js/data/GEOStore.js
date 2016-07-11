@@ -85,7 +85,19 @@ var GEOStore = (function ($, d3, data) {
         return key ? districts[key] : null;
     }
 
+    var dump = function () {
+        var computed = {
+            center: center,
+            districts: districts
+        };
+
+        var string = JSON.stringify(computed);
+
+        console.log(string);
+    };
+
     var methods = {
+        dump: dump,
         getCenter: getCenter,
         getDistricts: getDistricts,
         getDistrictByCoords: getDistrictByCoords
