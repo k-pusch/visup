@@ -113,4 +113,4 @@ var GEOStore = (function ($, d3, data) {
         onReady: onReady
     }
 
-})(jQuery, d3, geoData);
+})(jQuery, d3, window.geoData || null);

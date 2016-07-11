@@ -1,4 +1,6 @@
-var DataStore = (function (_, data) {
+var DataStore = (function (_, entries, computed) {
+
+    var data;
 
     var fields = [
         'year',
@@ -52,6 +54,16 @@ var DataStore = (function (_, data) {
             mapping[field] = values;
         });
     };
+
+    if (computed) {
+        init = function () {
+            data = computed.entries;
+            mapping = computed.mapping;
+            options = computed.options;
+        }
+    } else {
+        data = entries;
+    }
 
     var promise = new Promise(function (resolve, reject) {
         GEOStore.onReady(
@@ -217,4 +229,4 @@ var DataStore = (function (_, data) {
         onReady: onReady
     }
 
-})(_, partyData);
+})(_, window.partyData || null, window.computedData || null);
