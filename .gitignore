@@ -6,3 +6,12 @@
 *.css
 *.css.map
 .sass-cache
+
+# Mac
+.DS_Store
+
+# Build
+node_modules
+assets/js/components/*.js
+visup-*/
+visup-*.zip
