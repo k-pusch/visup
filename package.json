@@ -1,0 +1,14 @@
+{
+  "name": "VISUP",
+  "version": "1.0.0",
+  "description": "Medieninformatik",
+  "main": "index.html",
+  "author": "Kristina Pusch",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "sass": "^0.5.0"
+  }
+}
